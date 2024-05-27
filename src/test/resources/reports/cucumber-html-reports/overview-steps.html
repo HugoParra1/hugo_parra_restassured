@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.tablesorter.min.js"></script>
+<script src="js/Chart.min.js"></script>
+<script src="js/moment.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>
+<link rel="stylesheet" href="css/cucumber.css" type="text/css"/>
+<link rel="stylesheet" href="css/font-awesome.min.css"/>
+<link rel="shortcut icon" href="images/favicon.png"/>
+
+<script>
+$(document).ready(function() {
+    // this will tell tablesorter to try looking for the data-value attribute
+    // if present, it'll sort by that instead
+    // otherwise, it'll sort by the text content of the table cell
+    $("#tablesorter").tablesorter({
+        textAttribute: 'data-value',
+        // ignores the first row of the header, the 'scenario', 'steps', since
+        // sorting those doesn't make sense
+        selectorHeaders: '> thead tr:not(.dont-sort) th',
+        // use a stable sort
+        sortStable: true
+    });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<title>Cucumber Reports (no 1) - Steps Overview</title>
+
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navigation">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse">
+      <p class="navbar-text navbar-left">Cucumber Report</p>
+      <ul class="nav navbar-nav navbar-right">
+        <li role="presentation" ><a href="overview-features.html">Features</a></li>
+        <li role="presentation" ><a href="overview-tags.html">Tags</a></li>
+        <li role="presentation"     class="active" ><a href="overview-steps.html">Steps</a></li>
+        <li role="presentation" ><a href="overview-failures.html">Failures</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container-fluid">
+  <div class="col-md-5 col-md-offset-1">
+
+<table class="table table-bordered" id="build-info">
+  <thead>
+    <tr>
+      <th>Project</th>
+        <th>Number</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="info">
+      <td>cucumber test project</td>
+        <td>1</td>
+      <td>27 May 2024, 19:36</td>
+    </tr>
+  </tbody>
+</table>
+
+  </div>
+  <div class="col-md-3 col-md-offset-2">
+  </div>
+</div>
+
+
+<div id="report-lead" class="container-fluid">
+  <div class="col-md-10 col-md-offset-1">
+    <h2>Steps Statistics</h2>
+      <p>The following graph shows step statistics for this build. Below list is based on results.
+ step does not provide information about result then is not listed below.
+ Additionally @Before and @After are not counted because they are part of the scenarios, not steps.</p>
+  </div>
+</div>
+
+<div class="container-fluid" id="report">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <table id="tablesorter" class="stats-table table-hover">
+
+        <thead>
+          <tr class="header">
+            <th>Implementation</th>
+            <th>Occurrences</th>
+            <th>Average duration</th>
+            <th>Max duration</th>
+            <th>Total durations</th>
+            <th>Ratio</th>
+          </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+              <td class="location">pets.PetSteps.iHaveAnExistingPetWithId(int)</td>
+              <td>2</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">pets.PetSteps.iHavePetsWithStatus(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">pets.PetSteps.iSendARequestToDeleteThePet()</td>
+              <td>1</td>
+              <td class="duration" data-value="485000000">0.485</td>
+              <td class="duration" data-value="485000000">0.485</td>
+              <td class="duration" data-value="485000000">0.485</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">pets.PetSteps.iSendARequestToFindPetsByID()</td>
+              <td>1</td>
+              <td class="duration" data-value="457000000">0.457</td>
+              <td class="duration" data-value="457000000">0.457</td>
+              <td class="duration" data-value="457000000">0.457</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">pets.PetSteps.iSendARequestToFindPetsByStatus()</td>
+              <td>1</td>
+              <td class="duration" data-value="591000000">0.591</td>
+              <td class="duration" data-value="591000000">0.591</td>
+              <td class="duration" data-value="591000000">0.591</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">pets.PetSteps.iSendARequestToUpdateThePet()</td>
+              <td>1</td>
+              <td class="duration" data-value="470000000">0.470</td>
+              <td class="duration" data-value="470000000">0.470</td>
+              <td class="duration" data-value="470000000">0.470</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">pets.PetSteps.i_have_a_pet_payload()</td>
+              <td>2</td>
+              <td class="duration" data-value="1000000">0.001</td>
+              <td class="duration" data-value="1000000">0.002</td>
+              <td class="duration" data-value="2000000">0.002</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">pets.PetSteps.i_send_a_request_to_create_the_pet()</td>
+              <td>1</td>
+              <td class="duration" data-value="1140000000">1.140</td>
+              <td class="duration" data-value="1140000000">1.140</td>
+              <td class="duration" data-value="1140000000">1.140</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">pets.PetSteps.setup()</td>
+              <td>24</td>
+              <td class="duration" data-value="12291666">0.012</td>
+              <td class="duration" data-value="12291666">0.291</td>
+              <td class="duration" data-value="295000000">0.295</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">pets.PetSteps.thePetIsDeletedSuccessfully()</td>
+              <td>1</td>
+              <td class="duration" data-value="1000000">0.001</td>
+              <td class="duration" data-value="1000000">0.001</td>
+              <td class="duration" data-value="1000000">0.001</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">pets.PetSteps.thePetIsFoundSuccessfully()</td>
+              <td>1</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">pets.PetSteps.thePetIsUpdatedSuccessfully()</td>
+              <td>1</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">pets.PetSteps.thePetsAreFoundSuccessfully()</td>
+              <td>1</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">pets.PetSteps.the_pet_is_created_successfully()</td>
+              <td>1</td>
+              <td class="duration" data-value="2000000">0.002</td>
+              <td class="duration" data-value="2000000">0.002</td>
+              <td class="duration" data-value="2000000">0.002</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">store.StoreSteps.iHaveAnOrderIDOfOrderId(int)</td>
+              <td>2</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">store.StoreSteps.iHaveAnOrderPayload()</td>
+              <td>1</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">store.StoreSteps.iSendARequestToCreateTheOrder()</td>
+              <td>1</td>
+              <td class="duration" data-value="457000000">0.457</td>
+              <td class="duration" data-value="457000000">0.457</td>
+              <td class="duration" data-value="457000000">0.457</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">store.StoreSteps.iSendARequestToDeleteTheOrderByID()</td>
+              <td>1</td>
+              <td class="duration" data-value="479000000">0.479</td>
+              <td class="duration" data-value="479000000">0.479</td>
+              <td class="duration" data-value="479000000">0.479</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">store.StoreSteps.iSendARequestToGetTheOrderByID()</td>
+              <td>1</td>
+              <td class="duration" data-value="460000000">0.460</td>
+              <td class="duration" data-value="460000000">0.460</td>
+              <td class="duration" data-value="460000000">0.460</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">store.StoreSteps.i_send_a_request_to_get_pet_inventories_by_status()</td>
+              <td>1</td>
+              <td class="duration" data-value="467000000">0.467</td>
+              <td class="duration" data-value="467000000">0.467</td>
+              <td class="duration" data-value="467000000">0.467</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">store.StoreSteps.setup()</td>
+              <td>24</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">store.StoreSteps.theOrderIsCreatedSuccessfully()</td>
+              <td>1</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">store.StoreSteps.theOrderIsDeletedSuccessfully()</td>
+              <td>1</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">store.StoreSteps.theOrderIsRetrievedSuccessfully()</td>
+              <td>1</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">store.StoreSteps.theOrderWithIDOfOrderIdDoesNotExists(int)</td>
+              <td>1</td>
+              <td class="duration" data-value="478000000">0.478</td>
+              <td class="duration" data-value="478000000">0.478</td>
+              <td class="duration" data-value="478000000">0.478</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">store.StoreSteps.the_pet_inventories_are_returned_successfully()</td>
+              <td>1</td>
+              <td class="duration" data-value="81000000">0.081</td>
+              <td class="duration" data-value="81000000">0.081</td>
+              <td class="duration" data-value="81000000">0.081</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">user.UserSteps.iHaveAUserPayloadWithUsernameUsernameAndEmailEmail(java.lang.String,java.lang.String)</td>
+              <td>4</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">user.UserSteps.iHaveAnExistingUserWithUsername(java.lang.String)</td>
+              <td>8</td>
+              <td class="duration" data-value="125000">0.000</td>
+              <td class="duration" data-value="125000">0.001</td>
+              <td class="duration" data-value="1000000">0.001</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">user.UserSteps.iSendARequestToCreateTheUser()</td>
+              <td>4</td>
+              <td class="duration" data-value="462750000">0.462</td>
+              <td class="duration" data-value="462750000">0.507</td>
+              <td class="duration" data-value="1851000000">1.851</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">user.UserSteps.iSendARequestToGetTheUserByUsername()</td>
+              <td>2</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">user.UserSteps.i_have_an_updated_user_payload_with_email(java.lang.String)</td>
+              <td>4</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">user.UserSteps.i_have_credentials_with_username_and_password(java.lang.String,java.lang.String)</td>
+              <td>2</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">user.UserSteps.i_send_a_request_to_delete_the_user()</td>
+              <td>2</td>
+              <td class="duration" data-value="452500000">0.452</td>
+              <td class="duration" data-value="452500000">0.467</td>
+              <td class="duration" data-value="905000000">0.905</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">user.UserSteps.i_send_a_request_to_login_the_user()</td>
+              <td>2</td>
+              <td class="duration" data-value="468500000">0.468</td>
+              <td class="duration" data-value="468500000">0.494</td>
+              <td class="duration" data-value="937000000">0.937</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">user.UserSteps.i_send_a_request_to_logout_the_user()</td>
+              <td>1</td>
+              <td class="duration" data-value="486000000">0.486</td>
+              <td class="duration" data-value="486000000">0.486</td>
+              <td class="duration" data-value="486000000">0.486</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">user.UserSteps.i_send_a_request_to_update_the_user()</td>
+              <td>4</td>
+              <td class="duration" data-value="476000000">0.476</td>
+              <td class="duration" data-value="476000000">0.505</td>
+              <td class="duration" data-value="1904000000">1.904</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">user.UserSteps.setup()</td>
+              <td>24</td>
+              <td class="duration" data-value="83333">0.000</td>
+              <td class="duration" data-value="83333">0.001</td>
+              <td class="duration" data-value="2000000">0.002</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">user.UserSteps.theUserIsCreatedSuccessfully()</td>
+              <td>4</td>
+              <td class="duration" data-value="250000">0.000</td>
+              <td class="duration" data-value="250000">0.001</td>
+              <td class="duration" data-value="1000000">0.001</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">user.UserSteps.theUserIsRetrievedSuccessfully()</td>
+              <td>2</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">user.UserSteps.the_user_is_deleted_successfully()</td>
+              <td>2</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">user.UserSteps.the_user_is_logged_in_successfully()</td>
+              <td>2</td>
+              <td class="duration" data-value="500000">0.000</td>
+              <td class="duration" data-value="500000">0.001</td>
+              <td class="duration" data-value="1000000">0.001</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">user.UserSteps.the_user_is_logged_out_successfully()</td>
+              <td>1</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">user.UserSteps.the_user_is_updated_successfully()</td>
+              <td>4</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+        </tbody>
+
+        <tfoot class="total">
+          <tr>
+            <td>43</td>
+            <td>147</td>
+            <td class="duration">0.081</td>
+            <td class="duration">1.904</td>
+            <td class="duration">11.953</td>
+            <td>Totals</td>
+          </tr>
+        </tfoot>
+
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<nav class="navbar navbar-default" id="footer">
+  <div class="container-fluid">
+    <p class="navbar-text navbar-right">
+        <small>generate Cucumber HTML reports via:&nbsp;</small>
+        <a class="navbar-link" href="https://github.com/jenkinsci/cucumber-reports-plugin">Jenkins Plugin</a> |
+        <a class="navbar-link" href="https://github.com/damianszczepanik/cucumber-reporting">Standalone</a> |
+        <a class="navbar-link" href="https://github.com/damianszczepanik/cucumber-sandwich">Sandwich</a> |
+        <a class="navbar-link" href="https://github.com/damianszczepanik/maven-cucumber-reporting">Maven</a>
+        &nbsp;&nbsp;
+    </p>
+  </div>
+</nav>
+
+</body>
+</html>

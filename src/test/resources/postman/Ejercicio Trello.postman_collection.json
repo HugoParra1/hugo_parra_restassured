@@ -1,0 +1,675 @@
+{
+	"info": {
+		"_postman_id": "883601ee-0994-4ed9-8745-295ed1a7b870",
+		"name": "Ejercicio Trello",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24488308"
+	},
+	"item": [
+		{
+			"name": "Creacion de Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json();",
+							"    var newBoardId = jsonData.id;",
+							"    var newBoardName = jsonData.name",
+							"    pm.environment.set(\"boardId\", newBoardId);",
+							"    pm.environment.set(\"boardName\", newBoardName);",
+							"    ",
+							"    console.log(\"El nuevo boardId es: \" + newBoardId);",
+							"} else {",
+							"    console.log(\"Error al crear el board: \" + pm.response.code);",
+							"}",
+							"",
+							"",
+							"pm.test(\"Content-Type header is application/json\", function () {",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+							"});",
+							"",
+							"pm.test(\"Response has the required fields\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.include.all.keys('id', 'name', 'closed', 'prefs', 'labelNames', 'limits');",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/boards/?key={{key}}&token={{token}}&name=Prueba de POSTMAN",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"boards",
+						""
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "name",
+							"value": "Prueba de POSTMAN"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creacion de List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"if (pm.response.code === 200) {",
+							"",
+							"    var jsonData = pm.response.json();",
+							"    var newListId = jsonData.id;",
+							"",
+							"    pm.environment.set(\"ListId\", newListId);",
+							"    ",
+							"    console.log(\"El nuevo boardId es: \" + newListId);",
+							"} else {",
+							"    console.log(\"Error al crear el board: \" + pm.response.code);",
+							"}",
+							"",
+							"",
+							"pm.test(\"Response has the required fields\", function () {",
+							"  const responseData = pm.response.json();",
+							"  pm.expect(responseData).to.be.an('object');",
+							"  pm.expect(responseData).to.have.property('id');",
+							"  pm.expect(responseData).to.have.property('name');",
+							"  pm.expect(responseData).to.have.property('closed');",
+							"  pm.expect(responseData).to.have.property('idBoard');",
+							"  pm.expect(responseData).to.have.property('pos');",
+							"});",
+							"",
+							"",
+							"pm.test(\"Closed field must be a boolean\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.closed).to.be.a('boolean');",
+							"});",
+							"",
+							"",
+							"pm.test(\"Limits object is present in the response\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.limits).to.exist;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Color field is either null or a valid color code\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.color).to.satisfy((color) => {",
+							"        return color === null || /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(color);",
+							"    }, \"Color should be either null or a valid color code\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/lists?key={{key}}&token={{token}}&name=Lista de Postman&idBoard={{boardId}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "name",
+							"value": "Lista de Postman"
+						},
+						{
+							"key": "idBoard",
+							"value": "{{boardId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Content-Type header is application/json\", function () {",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response body has the required fields\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData).to.include.all.keys('id', 'name', 'desc', 'closed', 'idOrganization');",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "api.trello.com/1/boards/{{boardId}}?name=Lista Modificada Postman&key={{key}}&token={{token}}",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"boards",
+						"{{boardId}}"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Lista Modificada Postman"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update de Lista",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has the required fields\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.id).to.exist;",
+							"    pm.expect(responseData.name).to.exist;",
+							"    pm.expect(responseData.closed).to.exist;",
+							"    pm.expect(responseData.idBoard).to.exist;",
+							"    pm.expect(responseData.pos).to.exist;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Name is a non-empty string\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData).to.be.an('object');",
+							"  pm.expect(responseData.name).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Name should not be empty\");",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Prueba Postman\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.trello.com/1/lists/{{ListId}}?key={{key}}&token={{token}}&name=Prueba",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"lists",
+						"{{ListId}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "name",
+							"value": "Prueba"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Tarjeta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json();",
+							"    var newCardId = jsonData.id;",
+							"",
+							"    pm.environment.set(\"CardId\", newCardId);",
+							"    ",
+							"    console.log(\"El nuevo boardId es: \" + newCardId);",
+							"} else {",
+							"    console.log(\"Error al crear el board: \" + pm.response.code);",
+							"}",
+							"",
+							"",
+							"pm.test(\"Response has the required fields\", function () {",
+							"    const responseData = pm.response.json();",
+							"",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData).to.have.property('id');",
+							"    pm.expect(responseData).to.have.property('badges');",
+							"    pm.expect(responseData).to.have.property('closed');",
+							"    pm.expect(responseData).to.have.property('dateLastActivity');",
+							"    pm.expect(responseData).to.have.property('desc');",
+							"    pm.expect(responseData).to.have.property('due');",
+							"    pm.expect(responseData).to.have.property('dueComplete');",
+							"    pm.expect(responseData).to.have.property('idList');",
+							"    pm.expect(responseData).to.have.property('idMembers');",
+							"    pm.expect(responseData).to.have.property('idShort');",
+							"    pm.expect(responseData).to.have.property('labels');",
+							"    pm.expect(responseData).to.have.property('name');",
+							"    pm.expect(responseData).to.have.property('pos');",
+							"    pm.expect(responseData).to.have.property('url');",
+							"});",
+							"",
+							"",
+							"pm.test(\"Id should be a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.id).to.be.a('string').and.to.have.length.of.at.least(1);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "api.trello.com/1/cards?idList={{ListId}}&name=Tarjeta de Postman&desc=Tarjeta de Postman&key={{key}}&token={{token}}",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"cards"
+					],
+					"query": [
+						{
+							"key": "idList",
+							"value": "{{ListId}}"
+						},
+						{
+							"key": "name",
+							"value": "Tarjeta de Postman"
+						},
+						{
+							"key": "desc",
+							"value": "Tarjeta de Postman"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar Tarjeta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has the required fields\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    const requiredFields = [\"id\", \"badges\", \"closed\", \"dueComplete\", \"dateLastActivity\", \"desc\", \"descData\", \"due\", \"dueReminder\", \"email\", \"idBoard\", \"idChecklists\", \"idList\", \"idMembers\", \"idMembersVoted\", \"idShort\", \"idAttachmentCover\", \"labels\", \"idLabels\", \"manualCoverAttachment\", \"name\", \"pos\", \"shortLink\", \"shortUrl\", \"start\", \"subscribed\", \"url\", \"cover\", \"isTemplate\", \"cardRole\"];",
+							"    ",
+							"    requiredFields.forEach(field => {",
+							"        pm.expect(responseData).to.have.property(field);",
+							"    });",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/cards/{{CardId}}?key={{key}}&token={{token}}&name=Modificacion de tarjeta&desc=This is a description modified",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"cards",
+						"{{CardId}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "name",
+							"value": "Modificacion de tarjeta"
+						},
+						{
+							"key": "desc",
+							"value": "This is a description modified"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Verify that the '_value' field is present and has a null value\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData._value).to.equal(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate the Content-Type header is application/json\", function () {\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has the required fields\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData).to.have.property('_value');\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/boards/{{boardId}}?key={{key}}&token={{token}}&name={{boardName}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"boards",
+						"{{boardId}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "name",
+							"value": "{{boardName}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ver Boards",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has the required fields\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('array').that.is.not.empty;",
+							"    ",
+							"    responseData.forEach(function(board) {",
+							"        pm.expect(board).to.have.property('id');",
+							"        pm.expect(board).to.have.property('name');",
+							"        pm.expect(board).to.have.property('closed');",
+							"        pm.expect(board).to.have.property('dateClosed');",
+							"        pm.expect(board).to.have.property('url');",
+							"        pm.expect(board).to.have.property('prefs');",
+							"        pm.expect(board).to.have.property('labelNames');",
+							"        pm.expect(board).to.have.property('memberships');",
+							"    });",
+							"});",
+							"",
+							"",
+							"pm.test(\"Limits object contains all required subfields\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('array');",
+							"    responseData.forEach(function(board) {",
+							"        pm.expect(board.limits).to.exist;",
+							"        pm.expect(board.limits).to.have.property('attachments');",
+							"        pm.expect(board.limits).to.have.property('boards');",
+							"        pm.expect(board.limits).to.have.property('cards');",
+							"        pm.expect(board.limits).to.have.property('checklists');",
+							"        pm.expect(board.limits).to.have.property('checkItems');",
+							"        pm.expect(board.limits).to.have.property('customFields');",
+							"        pm.expect(board.limits).to.have.property('customFieldOptions');",
+							"        pm.expect(board.limits).to.have.property('labels');",
+							"        pm.expect(board.limits).to.have.property('lists');",
+							"        pm.expect(board.limits).to.have.property('stickers');",
+							"        pm.expect(board.limits).to.have.property('reactions');",
+							"    });",
+							"});",
+							"",
+							"",
+							"pm.test(\"PowerUps array should be empty\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('array');",
+							"    responseData.forEach(function(board) {",
+							"        pm.expect(board.powerUps).to.be.an('array').that.is.empty;",
+							"    });",
+							"});",
+							"",
+							"",
+							"pm.test(\"Memberships array contains at least one element\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('array');",
+							"    pm.expect(responseData[0].memberships).to.be.an('array').that.is.not.empty;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/members/me/boards?key=7a86d02f0fc18d65d7524563883fdf7d&token=ATTA6e0497c6efdc30b5c282032fe400c0f08058ca9671aa81686177d7c081e23df6E1063C65",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"members",
+						"me",
+						"boards"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "7a86d02f0fc18d65d7524563883fdf7d"
+						},
+						{
+							"key": "token",
+							"value": "ATTA6e0497c6efdc30b5c282032fe400c0f08058ca9671aa81686177d7c081e23df6E1063C65"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
